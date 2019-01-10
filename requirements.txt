@@ -1,0 +1,6 @@
+# requirements.txt - to install all needed libs
+Flask>=0.12.4
+Werkzeug>=0.12.0
+# im_task_flask
+# google-api-python-client
+# GoogleAppEngineCloudStorageClient==1.9.22.1
