@@ -18,27 +18,33 @@ import logging
 
 # [START imports]
 from flask import Flask, render_template, request
+from flask.ext import restful
 # [END imports]
 
 # [START create_app]
 app = Flask(__name__)
+api = restful.Api(app)
 # [END create_app]
 
-# [START main]
+
+class HelloWorld(restful.Resource):
+    def get(self):
+        return {'hello': 'world'}
+
+
+api.add_resource(HelloWorld, '/userdata/v1/')
+
+
 @app.route('/')
 def main():
     return render_template('main.html')
-# [END main]
 
 
-# [START form]
 @app.route('/form')
 def form():
     return render_template('form.html')
-# [END form]
 
 
-# [START submitted]
 @app.route('/submitted', methods=['POST'])
 def submitted_form():
     name = request.form['name']
@@ -46,15 +52,13 @@ def submitted_form():
     site = request.form['site_url']
     comments = request.form['comments']
 
-    # [END submitted]
-    # [START render_template]
-    return render_template(
-        'submitted_form.html',
-        name=name,
-        email=email,
-        site=site,
-        comments=comments)
-    # [END render_template]
+    return render_template('submitted_form.html', name=name, email=email, site=site, comments=comments)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    """Return a custom 404 error."""
+    return 'Sorry, Nothing at this URL.', 404
 
 
 @app.errorhandler(500)
@@ -62,4 +66,6 @@ def server_error(e):
     # Log the error and stacktrace.
     logging.exception('An error occurred during a request.')
     return 'An internal error occurred.', 500
+
+
 # [END app]
