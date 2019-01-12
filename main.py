@@ -18,21 +18,21 @@ import logging
 
 # [START imports]
 from flask import Flask, render_template, request
-from flask.ext import restful
+from flask_restful import Resource, Api
 # [END imports]
 
 # [START create_app]
 app = Flask(__name__)
-api = restful.Api(app)
+api = Api(app)
 # [END create_app]
 
 
-class HelloWorld(restful.Resource):
+class HelloWorld(Resource):
     def get(self):
         return {'hello': 'world'}
 
 
-api.add_resource(HelloWorld, '/userdata/v1/')
+api.add_resource(HelloWorld, '/basedata/v1/')
 
 
 @app.route('/')

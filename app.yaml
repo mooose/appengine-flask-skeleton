@@ -12,7 +12,7 @@ skip_files:
 handlers:
 - url: /static
   static_dir: static
-- url: /basedata/v1/.*
+- url: /.*
   script: main.app
 
 # ssl is needed 
