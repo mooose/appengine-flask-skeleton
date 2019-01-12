@@ -12,6 +12,8 @@ skip_files:
 handlers:
 - url: /static
   static_dir: static
+- url: /basedata/v1/.*
+  script: basedata_api.app
 - url: /.*
   script: main.app
 

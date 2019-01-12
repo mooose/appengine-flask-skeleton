@@ -18,21 +18,10 @@ import logging
 
 # [START imports]
 from flask import Flask, render_template, request
-from flask_restful import Resource, Api
 # [END imports]
 
 # [START create_app]
 app = Flask(__name__)
-api = Api(app)
-# [END create_app]
-
-
-class HelloWorld(Resource):
-    def get(self):
-        return {'hello': 'world'}
-
-
-api.add_resource(HelloWorld, '/basedata/v1/')
 
 
 @app.route('/')
